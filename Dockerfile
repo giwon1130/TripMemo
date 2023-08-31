@@ -6,6 +6,6 @@ RUN gradle clean build -x test
 
 # Use the official OpenJDK image to run the jar file.
 FROM openjdk:11-jre-slim
-COPY --from=build /app/build/libs/trip-memo.jar /trip-memo.jar
+COPY --from=build /build/libs/trip-memo.jar /trip-memo.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/trip-memo.jar"]
