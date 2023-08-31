@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   build-and-deploy:
@@ -12,6 +12,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Decode SSH key
+      run: echo "${{ secrets.SSH_PRIVATE_KEY_BASE64 }}" | base64 -d > id_rsa
+      shell: bash
+
+    - name: Set up SSH
+      run: |
+        chmod 600 id_rsa
+        ssh-add id_rsa
+      shell: bash
 
     - name: Build Docker image
       run: docker build -t trip-memo .
@@ -26,4 +36,4 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ec2-user@54.180.80.2 "docker pull ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest && docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest"
       env:
-        PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
