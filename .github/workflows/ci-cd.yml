@@ -13,17 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Decode SSH key
-      run: echo "${{ secrets.SSH_PRIVATE_KEY_BASE64 }}" | base64 -d > id_rsa
-      shell: bash
-
-    - name: Set up SSH
-      run: |
-        eval $(ssh-agent -s)
-        chmod 600 id_rsa
-        ssh-add id_rsa
-      shell: bash
-
     - name: Build Docker image
       run: docker build -t trip-memo .
 
@@ -33,8 +22,12 @@ jobs:
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
         docker push ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest
 
-    - name: Deploy to AWS EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no ec2-user@54.180.80.2 "docker pull ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest && docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest"
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+    - name: Deploy to AWS EC2 using appleboy/ssh-action
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest
+          docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest
