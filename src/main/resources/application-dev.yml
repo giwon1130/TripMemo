@@ -1,23 +1,31 @@
 server:
-  port: 8080  # 웹 서버 포트 설정
+  port: 8080  # ? ?? ?? ??
 
 spring:
   datasource:
-    url: jdbc:postgresql://54.180.80.2:5432/trip_memo  # PostgreSQL 데이터베이스 URL
-    username: postgres  # 데이터베이스 사용자 이름
-    password: postgres  # 데이터베이스 비밀번호
-    driver-class-name: org.postgresql.Driver  # JDBC 드라이버 클래스 이름
+    url: jdbc:postgresql://54.180.80.2:5432/trip_memo  # PostgreSQL ?????? URL
+    username: postgres  # ?????? ??? ??
+    password: postgres  # ?????? ????
+    driver-class-name: org.postgresql.Driver  # JDBC ???? ??? ??
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  security:
+    user:
+      name: user
+      password: 2758
 
   jpa:
     hibernate:
-      ddl-auto: update  # JPA 테이블 자동 생성 설정
-    show-sql: true  # SQL 쿼리 로깅 여부
+      ddl-auto: update  # JPA ??? ?? ?? ??
+    show-sql: true  # SQL ?? ?? ??
     properties:
       hibernate:
-        format_sql: true  # SQL 쿼리 포맷팅 여부
+        format_sql: true  # SQL ?? ??? ??
 
 logging:
   level:
     org:
       hibernate:
-        type: trace  # Hibernate 로깅 레벨
+        type: trace  # Hibernate ?? ??
+
