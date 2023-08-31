@@ -14,7 +14,6 @@ java {
 
 bootJar {
     archiveBaseName = 'trip-memo'  // JAR 파일의 기본 이름
-    archiveVersion = '0.1.0'    // 버전
     archiveExtension = 'jar'    // 확장자
 }
 
