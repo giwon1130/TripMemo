@@ -19,6 +19,7 @@ jobs:
 
     - name: Set up SSH
       run: |
+        eval $(ssh-agent -s)
         chmod 600 id_rsa
         ssh-add id_rsa
       shell: bash
