@@ -18,6 +18,8 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
 
+
+    // 테스트
     private final UserService userService;
 
     @ApiOperation(value = "View a list of available users", response = List.class)
