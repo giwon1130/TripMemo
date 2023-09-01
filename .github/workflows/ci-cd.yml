@@ -29,5 +29,10 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          # Stop and remove any existing containers with the same name
+          docker stop trip-memo || true
+          docker rm trip-memo || true
+          
+          # Pull the latest image and run a new container
           docker pull ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest
-          docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest
+          docker run -d -p 8080:8080 --name trip-memo ${{ secrets.DOCKER_USERNAME }}/trip-memo:latest
