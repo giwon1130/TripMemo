@@ -44,6 +44,10 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-spatial
+    implementation group: 'org.hibernate', name: 'hibernate-spatial', version: '5.6.14.Final'
+
+
 
 }
 

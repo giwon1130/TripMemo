@@ -3,7 +3,6 @@ package com.ig.tripmemo.service;
 import com.ig.tripmemo.repository.UserRepository;
 import com.ig.tripmemo.repository.entity.Users;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
