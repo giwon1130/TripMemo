@@ -45,6 +45,10 @@ public class Users {
     @Size(max = 120)
     private String password;
 
+    @ApiModelProperty(notes = "The phone number of the user")
+    @Size(max = 15)
+    private String phoneNumber;
+
     @ApiModelProperty(notes = "The role of the user")
     private String role;  // Could be an Enum
 
