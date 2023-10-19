@@ -1,6 +1,8 @@
 # 아직 구분안되어 있음
 server:
   port: 8080  # ? ?? ?? ??
+  servlet:
+    context-path: /api # 공통 경로 설정
 
 spring:
   datasource:
