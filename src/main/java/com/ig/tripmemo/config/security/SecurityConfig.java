@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             "/swagger-ui/**",
+            "/users",
             "/api/v1/login" // 임시
     };
 
