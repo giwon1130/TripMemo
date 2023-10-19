@@ -1,5 +1,5 @@
 # grade7, jdk11
-FROM gradle:7.0.2-jdk20 AS build
+FROM adoptopenjdk/openjdk20:alpine-slim AS build
 WORKDIR /app
 COPY . .
 RUN gradle clean build -x test
